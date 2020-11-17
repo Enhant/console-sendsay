@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Login from 'containers/LoginForm';
+import injectSheet from 'react-jss';
+import Container from 'components/Container';
+import PrivateRoute from 'components/PrivateRoute';
+import Console from 'containers/Console';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const style = {
+    '@global': {
+        html: {
+            height: '100%',
+            width: '100%',
+            fontFamily: 'sans-serif',
+            lineHeight: 1.15,
+        },
+        body: {
+            height: '100%',
+            width: '100%',
+            margin: 0,
+            fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
+            fontSize: '1rem',
+            fontWeight: 400,
+            lineHeight: 1.5,
+            color: '#212529',
+            textAlign: 'left',
+            background: '#E5E5E5'
+        },
+    },
+};
+// Использовать css-module
+const App = () => (
+    <Container>
+        <Switch>
+            <Route path="/" exact component={Login} />
+            <PrivateRoute path="/console" component={Console} />
+        </Switch>
+    </Container>
+);
 
-export default App;
+export default injectSheet(style)(App);
